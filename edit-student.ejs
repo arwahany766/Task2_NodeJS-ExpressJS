@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Student</title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <a href="/" class="logo">Student System</a>
+        <ul>
+          <% if (locals.user) { %>
+          <li><a href="/students">All Students</a></li>
+          <li><a href="/auth/logout" class="btn-nav-logout">Logout (<%= user.username %>)</a></li>
+          <% } %>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="form-container">
+        <h1>Edit Student: <%= student.name %></h1>
+        <form action="/students/edit/<%= student._id %>" method="POST">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" value="<%= student.name %>" required />
+
+          <label for="studentId">Student ID</label>
+          <input type="text" id="studentId" name="studentId" value="<%= student.studentId %>" required />
+
+          <label for="department">Department</label>
+          <input type="text" id="department" name="department" value="<%= student.department %>" required />
+
+          <label for="age">Age</label>
+          <input type="number" id="age" name="age" value="<%= student.age %>" required />
+
+          <button type="submit" class="btn-blue">Update Student</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

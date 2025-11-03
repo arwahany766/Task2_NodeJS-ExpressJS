@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student System</title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <a href="/" class="logo">Student System</a>
+        <ul>
+          <% if (locals.user) { %>
+          <li><a href="/students" class="btn-nav">Dashboard</a></li>
+          <li><a href="/auth/logout" class="btn-nav-logout">Logout</a></li>
+          <% } else { %>
+          <li><a href="/auth/login">Login</a></li>
+          <li><a href="/auth/register" class="btn-nav">Register</a></li>
+          <% } %>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="hero">
+        <h1>Welcome to the Student Management System</h1>
+        <p>Manage student records efficiently and securely.</p>
+
+        <% if (!user) { %>
+        <div class="cta-buttons">
+          <a href="/auth/login" class="btn-blue">Login</a>
+          <a href="/auth/register" class="btn-blue">Register</a>
+        </div>
+        <% } else { %>
+        <div class="cta-buttons">
+          <a href="/students" class="btn-blue">View Students</a>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>

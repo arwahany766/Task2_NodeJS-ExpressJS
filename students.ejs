@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Students Dashboard</title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <a href="/" class="logo">Student System</a>
+        <ul>
+          <% if (locals.user) { %>
+          <li><a href="/students/add" class="btn-nav">Add Student</a></li>
+          <li><a href="/auth/logout" class="btn-nav-logout">Logout (<%= user.username %>)</a></li>
+          <% } %>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <% if (locals.success_msg && locals.success_msg.length > 0) { %>
+      <div class="alert alert-success"><%= success_msg %></div>
+      <% } %>
+
+      <div class="search-bar">
+        <form action="/students" method="GET">
+          <input type="text" name="search" placeholder="Search by name..." value="<%= locals.searchQuery || '' %>" />
+          <button type="submit" class="btn-blue">Search</button>
+        </form>
+      </div>
+
+      <div class="student-grid-container">
+        <% if (students.length > 0) { %> <% students.forEach(student => { %>
+        <div class="student-card">
+          <div class="card-header">
+            <h3><%= student.name %></h3>
+          </div>
+          <div class="card-body">
+            <p><strong>Student ID:</strong> <%= student.studentId %></p>
+            <p><strong>Department:</strong> <%= student.department %></p>
+            <p><strong>Age:</strong> <%= student.age %></p>
+          </div>
+          <div class="card-footer">
+            <a href="/students/edit/<%= student._id %>" class="btn btn-edit">Edit</a>
+            <form action="/students/delete/<%= student._id %>" method="POST">
+              <button
+                type="submit"
+                class="btn btn-delete"
+                onclick="return confirm('Are you sure you want to delete <%= student.name %>?')">
+                Delete
+              </button>
+            </form>
+          </div>
+        </div>
+        <% }) %> <% } else { %>
+        <p>No students found.</p>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>

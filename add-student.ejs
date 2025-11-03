@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Student</title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <a href="/" class="logo">Student System</a>
+        <ul>
+          <% if (locals.user) { %>
+          <li><a href="/students">All Students</a></li>
+          <li><a href="/auth/logout" class="btn-nav-logout">Logout (<%= user.username %>)</a></li>
+          <% } %>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="form-container">
+        <h1>Add New Student</h1>
+        <form action="/students/add" method="POST">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" required />
+
+          <label for="studentId">Student ID</label>
+          <input type="text" id="studentId" name="studentId" required />
+
+          <label for="department">Department</label>
+          <input type="text" id="department" name="department" required />
+
+          <label for="age">Age</label>
+          <input type="number" id="age" name="age" required />
+
+          <button type="submit" class="btn-blue">Add Student</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
